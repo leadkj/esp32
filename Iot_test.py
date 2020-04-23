@@ -1,12 +1,11 @@
 from umqtt.simple import MQTTClient
 import usocket as socket
 import time
-import dht
+from Temp_Hum import get_temp_hum
 import machine
 import wifi_conn as wifi
 
 wifi.do_connect()
-d=dht.DHT22(machine.Pin(13))
 
 #设备证书信息
 ProductKey = "a110jrdi9yy"
@@ -54,17 +53,14 @@ def connect():
 	#please make sure keepalive value is not 0
 	
 	client.connect()
-	temperature=0
-	while temperature < 30:
+	while True:
 				
-		d.measure()
-		temperature=d.temperature()
-		humidity = d.humidity()
+		temperature ,humidity = get_temp_hum()
 		#send_mseg = '{"CurrentTemperature":%s}' % (temperature)
 		send_mseg = '{"params": {"CurrentTemperature": %s,"CurrentHumidity": %s},"method": "thing.event.property.post"}' % (temperature,humidity)
 		client.publish(topic="/sys/a110jrdi9yy/My_ESP/thing/event/property/post", msg=send_mseg,qos=1, retain=False)
-		time.sleep(10)
-	while True:
-		pass
+		time.sleep(30)
+	# while True:
+	# 	pass
 
 	#client.disconnect()
