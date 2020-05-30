@@ -5,6 +5,7 @@
 import machine
 import time
 from math import sqrt
+import chinese
 
 #TFTRotations and TFTRGB are bits to set
 # on MADCTL to control display rotation/color layout
@@ -33,7 +34,7 @@ def TFTColor( aR, aG, aB ) :
      This assumes rgb 565 layout and will be incorrect for bgr.'''
   return ((aR & 0xF8) << 8) | ((aG & 0xFC) << 3) | (aB >> 3)
 
-ScreenSize = (128, 160)
+ScreenSize = (135, 160) #若是屏幕右边或者下面又花屏，右边加大第一个数，下面加大第二个数
 
 class TFT(object) :
   """Sainsmart TFT 7735 display driver."""
@@ -87,11 +88,11 @@ class TFT(object) :
   GMCTRN1 = 0xE1
 
   BLACK = 0
-  RED = TFTColor(0xFF, 0x00, 0x00)
+  RED = TFTColor(0x00, 0x00, 0xFF)
   MAROON = TFTColor(0x80, 0x00, 0x00)
   GREEN = TFTColor(0x00, 0xFF, 0x00)
   FOREST = TFTColor(0x00, 0x80, 0x80)
-  BLUE = TFTColor(0x00, 0x00, 0xFF)
+  BLUE = TFTColor(0xFF, 0x00, 0x00)
   NAVY = TFTColor(0x00, 0x00, 0x80)
   CYAN = TFTColor(0x00, 0xFF, 0xFF)
   YELLOW = TFTColor(0xFF, 0xFF, 0x00)

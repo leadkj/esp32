@@ -1,11 +1,37 @@
 print("Hello,sherlock 221b")
 from wifi_conn import do_connect
-from blinker_test import LED
+import Lcd_text as lt 
+from ST7735 import TFT
+import utime
+import machine
+print(utime.localtime())
+from Iot_test import IOT_CONN
+#from blinker_test import LED
+do_connect()#wifi
 
-#连接wifi
-do_connect()
+tm = machine.Timer(-1)
+tm.init(period=600000,mode=machine.Timer.PERIODIC,callback=lt.wd)
 
-#初始化blinker
+tm1 = machine.Timer(0)
+tm1.init(period=1000,mode=machine.Timer.PERIODIC,callback=lt.currt_time)
 
-led=LED()
-led.run()
+iconn = IOT_CONN()
+iconn.connect()
+
+tm2 = machine.Timer(1)
+tm2.init(period=120000,mode=machine.Timer.PERIODIC,callback=iconn.post_data)
+
+#脕卢陆脫wifi
+#do_connect()
+
+#鲁玫脢录禄炉blinker
+lt.template()
+#lt.write_text([30,20],"Hello ESP",1,TFT.BLUE)
+while 1:
+	lt.draw_smile()
+	utime.sleep(5)
+	lt.show_weather()
+	utime.sleep(5)
+
+#led=LED()
+#led.run()

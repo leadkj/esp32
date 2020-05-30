@@ -1,10 +1,11 @@
 from ST7735 import TFT,TFTColor
 from machine import SPI,Pin
-spi = SPI(2, baudrate=20000000, polarity=0, phase=0, sck=Pin(14), mosi=Pin(13), miso=Pin(12))
-tft=TFT(spi,16,17,18)
+spi = SPI(2, baudrate=20000000, polarity=0, phase=0, sck=Pin(19), mosi=Pin(18), miso=Pin(21))
+tft=TFT(spi,5,4,2)
 tft.initr()
 tft.rgb(True)
 tft.fill(TFT.BLACK)
+
 
 f=open('test.bmp', 'rb')
 if f.read(2) == b'BM':  #header
