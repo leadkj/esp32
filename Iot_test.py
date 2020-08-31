@@ -6,9 +6,9 @@ import machine
 
 
 #设备证书信息
-ProductKey = "a110jrdi9yy"
+ProductKey = "xxxxxxx"
 DeviceName = "My_ESP"
-DeviceSecret = "ub5iU9VokB4FPAeXePrrTfNGKsn08mQ8"
+DeviceSecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 timestamp=789  #自定义
 #主要参数
 
